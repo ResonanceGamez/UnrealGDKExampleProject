@@ -1,0 +1,15 @@
+SigningCertificate=
+RSyncUsername=Yu Junting
+MobileProvision=
+BundleIdentifier=io.improbable.unrealgdkdemo
+BundleDisplayName=UnrealGDK Demo
+BundleName=unrealgdkdemo
+bSupportsITunesFileSharing=True
+bGeneratedSYMFile=True
+bGeneratedSYMBundle=True
+bGenerateCrashReportSymbols=True
+bGenerateXCArchive=True
+bEnableRemoteNotificationsSupport=False
+bEnableAdvertisingIdentifier=False
+bEnableCloudKitSupport=False
+AdditionalPlistData=<key>CFBundleURLTypes</key><array><dict><key>CFBundleURLName</key><string></string><key>CFBundleTypeRole</key><string>Editor</string><key>CFBundleURLSchemes</key><array><string>firebase-game-loop</string></array></dict></array>

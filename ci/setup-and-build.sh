@@ -187,6 +187,7 @@ pushd "$(dirname "$0")"
     KEYWORD="https://console.developers.google.com/storage/browser/"
     for info in $(gcloud beta firebase test ios run --type game-loop --app ${EXAMPLEPROJECT_HOME}/${COOK_FOLDER}/IOS/GDKShooter.ipa --scenario-numbers 1 2>&1)
     do
+        echo ${info}
         if [ -n "$info" ] 
         then
             if [[ $info =~ "${KEYWORD}" ]] 

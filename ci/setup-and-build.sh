@@ -182,6 +182,9 @@ pushd "$(dirname "$0")"
     echo "--- recover ${SPATIALOS_CONFIGURATION}"
     cp ${BACKUP_SPATIALOS_JSON} ${SPATIALOS_JSON}
 
+    echo "--- install gcloud beta components"
+    gcloud components install beta
+
     TEST_LAB_PATH=""
     echo "--- upload and analyze firebase log"
     KEYWORD="https://console.developers.google.com/storage/browser/"

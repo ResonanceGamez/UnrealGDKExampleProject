@@ -70,6 +70,9 @@ pushd "$(dirname "$0")"
     GDK_BRANCH_NAME="${GDK_BRANCH:-master}"
     GDK_HOME="${EXAMPLEPROJECT_HOME}/Game/Plugins/UnrealGDK"
 
+    echo "--- show gcloud components list"
+    gcloud components list
+
     echo "--- clone-gdk-plugin"
     mkdir -p "${EXAMPLEPROJECT_HOME}/Game/Plugins"
     pushd "${EXAMPLEPROJECT_HOME}/Game/Plugins/"

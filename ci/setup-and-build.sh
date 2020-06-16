@@ -73,6 +73,9 @@ pushd "$(dirname "$0")"
     echo "--- show gcloud components list"
     gcloud components list
 
+    echo "--- install beta component of gcloud"
+    gcloud components install beta
+
     echo "--- clone-gdk-plugin"
     mkdir -p "${EXAMPLEPROJECT_HOME}/Game/Plugins"
     pushd "${EXAMPLEPROJECT_HOME}/Game/Plugins/"

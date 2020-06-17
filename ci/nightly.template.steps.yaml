@@ -39,7 +39,7 @@ macos: &macos
     - "environment=production"
     - "permission_set=builder"
     - "platform=macos"
-    - "queue=${DARWIN_BUILDER_QUEUE:-v4-9c6ee0ef-d}"
+    - "queue=${DARWIN_BUILDER_QUEUE:v4-1592331528-2736b365-d}"
   timeout_in_minutes: 60
   retry:
     automatic:

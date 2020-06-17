@@ -19,6 +19,9 @@ $launch_deployment = Get-Env-Variable-Value-Or-Default -environment_variable_nam
 
 $gdk_home = "${exampleproject_home}\Game\Plugins\UnrealGDK"
 
+Write-Log "install beta component of gcloud"
+gcloud components install beta
+
 Write-Log "show gcloud components list"
 gcloud components list
 

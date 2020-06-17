@@ -144,14 +144,14 @@ pushd "$(dirname "$0")"
         "${EXAMPLEPROJECT_HOME}/cooked-mac" \
         "-iterative"
 
-    echo "--- build-ios-client"
-    run_uat \
-        "${ENGINE_DIRECTORY}" \
-        "${EXAMPLEPROJECT_HOME}" \
-        "Development" \
-        "IOS" \
-        "${EXAMPLEPROJECT_HOME}/cooked-ios" \
-        ""
+    # echo "--- build-ios-client"
+    # run_uat \
+    #     "${ENGINE_DIRECTORY}" \
+    #     "${EXAMPLEPROJECT_HOME}" \
+    #     "Development" \
+    #     "IOS" \
+    #     "${EXAMPLEPROJECT_HOME}/cooked-ios" \
+    #     ""
 
     COOK_FOLDER="cooked-firebase-ios"
 

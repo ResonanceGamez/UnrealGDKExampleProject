@@ -19,6 +19,9 @@ $launch_deployment = Get-Env-Variable-Value-Or-Default -environment_variable_nam
 
 $gdk_home = "${exampleproject_home}\Game\Plugins\UnrealGDK"
 
+Write-Log "show gcloud components list"
+gcloud components list
+
 pushd "$exampleproject_home"
     Start-Event "clone-gdk-plugin" "build-unreal-gdk-example-project-:windows:"
         pushd "Game"

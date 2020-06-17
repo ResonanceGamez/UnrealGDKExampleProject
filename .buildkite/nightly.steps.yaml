@@ -40,6 +40,7 @@ windows: &windows
     - "platform=windows"
     - "scaler_version=2"
     - "queue=${CI_WINDOWS_BUILDER_QUEUE:-v4-20-03-26-102432-bk9951-8afe0ffb}"
+    - "boot_disk_size_gb=500"
   timeout_in_minutes: 60
   retry:
     automatic:
@@ -48,6 +49,22 @@ windows: &windows
       - <<: *bk_interrupted_by_signal
   plugins:
     - ca-johnson/taskkill#v4.1: ~
+
+macos: &macos
+  agents:
+    - "capable_of_building=gdk-for-unreal"
+    - "environment=production"
+    - "permission_set=builder"
+    - "platform=macos"
+    - "queue=${DARWIN_BUILDER_QUEUE:-v4-1592331528-2736b365-d}"
+  timeout_in_minutes: 60
+  retry:
+    automatic:
+      - <<: *agent_transients
+      - <<: *bk_system_error
+      - <<: *bk_interrupted_by_signal
+  plugins:
+  - ssh://git@github.com/improbable/apple-codesigning-plugin#v0.1.3: ~
 
 # NOTE: step labels turn into commit-status names like {org}/{repo}/{pipeline}/{step-label}, lower-case and hyphenated.
 # These are then relied on to have stable names by other things, so once named, please beware renaming has consequences.
@@ -61,6 +78,31 @@ steps:
       ENGINE_VERSION: "${ENGINE_VERSION}"
     <<: *script_runner
 
+  - label: "build-and-deploy-windows-${ENGINE_COMMIT_HASH}"
+    command: "powershell -NoProfile -NonInteractive -InputFormat Text -Command ./ci/setup-and-build.ps1"
+    <<: *windows 
+    artifact_paths:
+      - "UnrealEngine/Engine/Programs/AutomationTool/Saved/Logs/*"
+      - "cooked-android/**/*"
+      - "cooked-mac/**/*"
+      - "cooked-ios/**/*"
+    env:
+      ENGINE_COMMIT_HASH: "${ENGINE_COMMIT_HASH}"
+      STEP_NUMBER: "${STEP_NUMBER}"
+      UE-SharedDataCachePath: "\\\\gdk-for-unreal-cache.${CI_ENVIRONMENT}-intinf-eu1.i8e.io\\samba\\ddc"
+      
+  - label: "build-and-deploy-macos-${ENGINE_COMMIT_HASH}"
+    command: "./ci/setup-and-build.sh"
+    <<: *macos 
+    artifact_paths:
+      - "UnrealEngine/Engine/Programs/AutomationTool/Saved/Logs/*"
+      - "cooked-android/**/*"
+      - "cooked-mac/**/*"
+      - "cooked-ios/**/*"
+    env:
+      ENGINE_COMMIT_HASH: "${ENGINE_COMMIT_HASH}"
+      STEP_NUMBER: "${STEP_NUMBER}"
+      UE-SharedDataCachePath: "\\\\gdk-for-unreal-cache.${CI_ENVIRONMENT}-intinf-eu1.i8e.io\\samba\\ddc"
   - wait
 
   - label: "slack-notify"
